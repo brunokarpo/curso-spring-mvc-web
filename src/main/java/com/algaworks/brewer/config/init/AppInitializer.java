@@ -4,6 +4,11 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import com.algaworks.brewer.config.WebConfig;
 
+/**
+ * Esse cara aqui mantem as configura&ccedil;&otilde;es de inicializa&ccedil;&atilde;o da aplica&ccedil;&atilde;o.
+ *
+ * Configurando o DispatcherServlet do Spring MVC.
+ */
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
