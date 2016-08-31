@@ -19,6 +19,7 @@
 
 		<spring-framework.version>4.3.2.RELEASE</spring-framework.version>
 		<servlet.version>3.1.0</servlet.version>
+		<thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
 	</properties>
 
 	<build>
@@ -60,5 +61,20 @@
 			<version>${servlet.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- Thymeleaf -->
+		<dependency>
+		    <groupId>org.thymeleaf</groupId>
+		    <artifactId>thymeleaf</artifactId>
+		    <version>${thymeleaf.version}</version>
+		</dependency>
+
+		<!-- Thymeleaf Spring-->
+		<dependency>
+		    <groupId>org.thymeleaf</groupId>
+		    <artifactId>thymeleaf-spring4</artifactId>
+		    <version>${thymeleaf.version}</version>
+		</dependency>
+
 	</dependencies>
 </project>
