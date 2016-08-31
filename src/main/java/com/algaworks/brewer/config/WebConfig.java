@@ -34,6 +34,9 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		this.applicationContext = applicationContext;
 	}
 
+	/*
+	 * Esse metodo devolve o ViewResolver.
+	 */
 	@Bean
 	public ViewResolver viewResolver() {
 		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
@@ -42,6 +45,9 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		return resolver;
 	}
 
+	/*
+	 * Esse metodo devolve a Engine que resolvera os templates. Motor gerador de templates
+	 */
 	@Bean
 	public TemplateEngine templateEngine() {
 		SpringTemplateEngine engine = new SpringTemplateEngine();
@@ -50,6 +56,9 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		return engine;
 	}
 
+	/*
+	 * Nesse metodo eh definido onde o Spring vai buscar os arquivos HTML para devolver para o usuario
+	 */
 	private ITemplateResolver templateResolver() {
 		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
 		resolver.setApplicationContext(applicationContext);
