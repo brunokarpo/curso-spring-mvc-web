@@ -19,14 +19,14 @@ import com.algaworks.brewer.model.Cerveja;
 public class CervejasController {
 
 	@RequestMapping("/cervejas/novo") // O que o usuário passa na URL
-	public String novo() {
+	public String novo(Model model) {
+		model.addAttribute(new Cerveja());
 		return "cerveja/CadastroCerveja"; // pagina HTML que sera devolvida para o usuario
 	}
 
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
 	public String cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
 		if(result.hasErrors()) {
-			model.addAttribute("mensagem", "Erro encontrado no formulario");
 			return "cerveja/CadastroCerveja"; // FORWARD
 		}
 
