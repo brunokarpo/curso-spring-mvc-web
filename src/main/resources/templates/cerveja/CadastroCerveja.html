@@ -6,14 +6,15 @@
 	<h1>Olá! Thymeleaf configurado!</h1>
 
 	<br>
+
+	<div th:each="erro : ${#fields.detailedErrors('${cerveja.*}')}">
+		<span th:text="${erro.message}"></span>
+	</div>
+
 	<form method="post" th:object="${cerveja}">
 
-		<div th:each="erro : ${#fields.detailedErrors()}">
-			<span th:text="${erro.message}"></span>
-		</div>
 
 		<span th:text="${mensagem}"></span>
-
 		<br>
 		<label for="sku">SKU</label> <input type="text" id="sku" name="sku">
 		<br>
