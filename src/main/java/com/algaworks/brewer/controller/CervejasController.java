@@ -34,6 +34,7 @@ public class CervejasController {
 		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso");
 		System.out.println(" >>>>>> sku: " + cerveja.getSku());
 		System.out.println(" >>>>>> nome: " + cerveja.getNome());
+		System.out.println(" >>>>>> descricao: " + cerveja.getDescricao());
 		return "redirect:/cervejas/novo"; // Em redirect usa a URL e nao o nome da View (html na pasta template)
 	}
 
