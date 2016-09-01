@@ -17,8 +17,8 @@ public class CervejasController {
 	}
 
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
-	public String cadastrar() {
-		System.out.println(" >>>>>> Cadastrado!");
+	public String cadastrar(String sku) {
+		System.out.println(" >>>>>> sku: " + sku);
 		return "cerveja/CadastroCerveja";
 	}
 
