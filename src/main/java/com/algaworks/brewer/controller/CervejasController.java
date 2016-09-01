@@ -29,7 +29,7 @@ public class CervejasController {
 
 		System.out.println(" >>>>>> sku: " + cerveja.getSku());
 		System.out.println(" >>>>>> nome: " + cerveja.getNome());
-		return "cerveja/CadastroCerveja";
+		return "redirect:/cervejas/novo";
 	}
 
 }
