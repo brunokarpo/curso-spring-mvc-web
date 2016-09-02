@@ -37,9 +37,4 @@ public class CervejasController {
 		return "redirect:/cervejas/novo"; // Em redirect usa a URL e nao o nome da View (html na pasta template)
 	}
 
-	@RequestMapping("cervejas/cadastro")
-	public String cadastro() {
-		return "/cerveja/cadastro-produto";
-	}
-
 }
