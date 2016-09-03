@@ -52,7 +52,7 @@
 								<option value="">Pale lager</option>
 							</select>
 							<div class="bw-field-action__icon">
-								<a href="#">
+								<a href="#" data-toggle="modal" data-target="#modalCadastroRapidoEstilo">
 									<i class="glyphicon  glyphicon-plus-sign  bw-glyphicon-large"></i>
 								</a>
 							</div>
@@ -121,6 +121,8 @@
 
 			</form>
 		</div>
+
+		<div th:replace="estilo/CadastroRapidoEstilo :: modal"></div>
 	</section>
 </body>
 
