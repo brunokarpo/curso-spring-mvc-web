@@ -16,12 +16,17 @@
 
 		<java.version>1.8</java.version>
 		<maven-compiler-pluging.version>3.2</maven-compiler-pluging.version>
+		<flyway-maven-plugin.version>4.0.2</flyway-maven-plugin.version>
 
 		<spring-framework.version>4.3.2.RELEASE</spring-framework.version>
 		<servlet.version>3.1.0</servlet.version>
 		<thymeleaf.version>3.0.1.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.0.1</thymeleaf-layout-dialect.version>
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+		<log4j.version>2.6</log4j.version>
+		<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
+		<hibernate.version>5.1.0.Final</hibernate.version>
+		<postgres.version>9.4.1209</postgres.version>
 	</properties>
 
 	<build>
@@ -32,6 +37,18 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>${flyway-maven-plugin.version}</version>
+				<configuration>
+					<driver>org.postgresql.Driver</driver>
+					<user>postgres</user>
+        			<password>495tDttwhn</password>
+        			<url>jdbc:postgresql://localhost:5432/brewer</url>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -55,6 +72,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -92,5 +115,46 @@
 		    <version>${thymeleaf-layout-dialect.version}</version>
 		</dependency>
 
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${jcl-over-slf4j.version}</version>
+		</dependency>
+
+		<!-- Hibernate e JPA -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-java8</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<!-- PostgreSQL -->
+		<dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>${postgres.version}</version>
+		    <scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>
