@@ -27,6 +27,7 @@
 		<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
 		<hibernate.version>5.1.0.Final</hibernate.version>
 		<postgres.version>9.4.1209</postgres.version>
+		<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
 	</properties>
 
 	<build>
@@ -155,6 +156,12 @@
 		    <artifactId>postgresql</artifactId>
 		    <version>${postgres.version}</version>
 		    <scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring-data-jpa.version}</version>
 		</dependency>
 	</dependencies>
 </project>
