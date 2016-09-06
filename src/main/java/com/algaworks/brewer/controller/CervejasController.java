@@ -38,15 +38,17 @@ public class CervejasController {
 
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
-		if(result.hasErrors()) {
-			return novo(cerveja);
-		}
+//		if(result.hasErrors()) {
+//			return novo(cerveja);
+//		}
 
 		//Salva no banco de dados
 		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso");
 		System.out.println(" >>>>>> sku: " + cerveja.getSku());
 		System.out.println(" >>>>>> nome: " + cerveja.getNome());
 		System.out.println(" >>>>>> descricao: " + cerveja.getDescricao());
+		System.out.println(" >>>>>> Sabor: " + cerveja.getSabor());
+		System.out.println(" >>>>>> Origem: " + cerveja.getOrigem());
 		return new ModelAndView("redirect:/cervejas/novo"); // Em redirect usa a URL e nao o nome da View (html na pasta template)
 	}
 
