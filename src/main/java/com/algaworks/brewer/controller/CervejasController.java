@@ -25,7 +25,9 @@ public class CervejasController {
 
 	@RequestMapping("/cervejas/novo") // O que o usuário passa na URL
 	public String novo(Cerveja cerveja) {
-		cervejas.findAll(); // Apagar ...
+		cervejas.findBySku("AAA1111"); // Apagar ...
+
+		cervejas.findBySkuIgnoreCase("aa2222"); // Apagar ...
 
 		return "cerveja/CadastroCerveja"; // pagina HTML que sera devolvida para o usuario
 	}
