@@ -2,6 +2,7 @@ package com.algaworks.brewer.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.algaworks.brewer.model.Cerveja;
 import com.algaworks.brewer.model.Sabor;
+import com.algaworks.brewer.repository.Estilos;
 
 /**
  * Controlador de Cervejas. Utilizado para buscar o pacote onde as classes de controller estar&atilde;o. N&atilde;o apagar
@@ -20,10 +22,14 @@ import com.algaworks.brewer.model.Sabor;
 @Controller
 public class CervejasController {
 
+	@Autowired
+	private Estilos estilos;
+
 	@RequestMapping("/cervejas/novo") // O que o usuário passa na URL
 	public ModelAndView novo(Cerveja cerveja) {
 		ModelAndView mv = new ModelAndView("cerveja/CadastroCerveja");
 		mv.addObject("sabores", Sabor.values());
+		mv.addObject("estilos", estilos.findAll());
 
 		return mv; // pagina HTML que sera devolvida para o usuario
 	}
