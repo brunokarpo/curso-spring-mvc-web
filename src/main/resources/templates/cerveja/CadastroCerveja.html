@@ -81,14 +81,12 @@
 					<div class="col-lg-3  col-sm-6  form-group">
 						<label for="origem">Origem</label>
 						<div>
-							<div class="radio  radio-inline">
-								<input type="radio" name="origem">
-								<label>Nacional</label>
-							</div>
-							<div class="radio  radio-inline">
-								<input type="radio" name="origem">
-								<label>Importada</label>
-							</div>
+							<th:block th:each="origem : ${origens}">
+								<div class="radio  radio-inline">
+									<input th:id="|id_${origem}|" type="radio" th:value="${origem}" name="origem">
+									<label th:for="|id_${origem}|" th:text="${origem.descricao}" ></label>
+								</div>
+							</th:block>
 						</div>
 					</div>
 				</div>
