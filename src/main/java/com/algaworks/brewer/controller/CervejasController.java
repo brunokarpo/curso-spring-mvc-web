@@ -2,6 +2,8 @@ package com.algaworks.brewer.controller;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,8 @@ import com.algaworks.brewer.repository.Estilos;
  */
 @Controller
 public class CervejasController {
+
+	private static final Logger LOG = LoggerFactory.getLogger(CervejasController.class);
 
 	@Autowired
 	private Estilos estilos;
@@ -44,11 +48,11 @@ public class CervejasController {
 
 		//Salva no banco de dados
 		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso");
-		System.out.println(" >>>>>> sku: " + cerveja.getSku());
-		System.out.println(" >>>>>> nome: " + cerveja.getNome());
-		System.out.println(" >>>>>> descricao: " + cerveja.getDescricao());
-		System.out.println(" >>>>>> Sabor: " + cerveja.getSabor());
-		System.out.println(" >>>>>> Origem: " + cerveja.getOrigem());
+		LOG.info(" >>>>>> sku: " + cerveja.getSku());
+		LOG.info(" >>>>>> nome: " + cerveja.getNome());
+		LOG.info(" >>>>>> descricao: " + cerveja.getDescricao());
+		LOG.info(" >>>>>> Sabor: " + cerveja.getSabor());
+		LOG.info(" >>>>>> Origem: " + cerveja.getOrigem());
 		return new ModelAndView("redirect:/cervejas/novo"); // Em redirect usa a URL e nao o nome da View (html na pasta template)
 	}
 
