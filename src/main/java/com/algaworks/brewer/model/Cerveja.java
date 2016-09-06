@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -19,6 +20,7 @@ public class Cerveja extends Entidade {
 
 	private static final long serialVersionUID = -6475455336433188425L;
 
+	@Pattern(regexp = "([a-zA-Z]{2}\\d{4})?", message = "O SKU deve seguir o padrão XX9999")
 	@NotBlank(message = "SKU é obrigatório")
 	private String sku;
 
