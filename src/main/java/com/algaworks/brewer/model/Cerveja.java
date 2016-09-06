@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -28,19 +29,25 @@ public class Cerveja extends Entidade {
 	@Size(min=1, max=50, message="O tamanho da descrição deve estar entre 1 e 50")
 	private String descricao;
 
+	@NotNull
 	private BigDecimal valor;
 
+	@NotNull
 	@Column(name = "teor_alcoolico")
 	private BigDecimal teorAlcoolico;
 
+	@NotNull
 	private BigDecimal comissao;
 
+	@NotNull
 	@Column(name = "quantidade_estoque")
 	private Integer quantidadeEstoque;
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Origem origem;
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Sabor sabor;
 
