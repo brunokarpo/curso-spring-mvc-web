@@ -53,6 +53,7 @@ public class CervejasController {
 		LOG.info(" >>>>>> descricao: " + cerveja.getDescricao());
 		LOG.info(" >>>>>> Sabor: " + cerveja.getSabor());
 		LOG.info(" >>>>>> Origem: " + cerveja.getOrigem());
+		LOG.info(" >>>>>> Estilo: " + cerveja.getEstilo().getCodigo());
 		return new ModelAndView("redirect:/cervejas/novo"); // Em redirect usa a URL e nao o nome da View (html na pasta template)
 	}
 
