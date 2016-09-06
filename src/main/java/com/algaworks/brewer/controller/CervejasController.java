@@ -17,6 +17,7 @@ import com.algaworks.brewer.model.Cerveja;
 import com.algaworks.brewer.model.Origem;
 import com.algaworks.brewer.model.Sabor;
 import com.algaworks.brewer.repository.Estilos;
+import com.algaworks.brewer.service.CadastroCervejaService;
 
 /**
  * Controlador de Cervejas. Utilizado para buscar o pacote onde as classes de controller estar&atilde;o. N&atilde;o apagar
@@ -25,10 +26,11 @@ import com.algaworks.brewer.repository.Estilos;
 @Controller
 public class CervejasController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(CervejasController.class);
-
 	@Autowired
 	private Estilos estilos;
+
+	@Autowired
+	private CadastroCervejaService cadastroCervejaService;
 
 	@RequestMapping("/cervejas/novo") // O que o usuário passa na URL
 	public ModelAndView novo(Cerveja cerveja) {
@@ -42,18 +44,15 @@ public class CervejasController {
 
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
-//		if(result.hasErrors()) {
-//			return novo(cerveja);
-//		}
+		if(result.hasErrors()) {
+			// Depois a gente adiciona as mensagens de erro.
+			return novo(cerveja);
+		}
 
 		//Salva no banco de dados
+		cadastroCervejaService.salvar(cerveja);
 		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso");
-		LOG.info(" >>>>>> sku: " + cerveja.getSku());
-		LOG.info(" >>>>>> nome: " + cerveja.getNome());
-		LOG.info(" >>>>>> descricao: " + cerveja.getDescricao());
-		LOG.info(" >>>>>> Sabor: " + cerveja.getSabor());
-		LOG.info(" >>>>>> Origem: " + cerveja.getOrigem());
-		LOG.info(" >>>>>> Estilo: " + cerveja.getEstilo().getCodigo());
+
 		return new ModelAndView("redirect:/cervejas/novo"); // Em redirect usa a URL e nao o nome da View (html na pasta template)
 	}
 
