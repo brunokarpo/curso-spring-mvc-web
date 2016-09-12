@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "estilo")
@@ -12,6 +15,8 @@ public class Estilo extends Entidade {
 
 	private static final long serialVersionUID = 1773634308105458149L;
 
+	@NotBlank(message = "O nome do estilo é obrigatório")
+	@Size(max = 15, message = "O nome do estilo não pode ter mais que 15 caracteres")
 	private String nome;
 
 	@OneToMany(mappedBy = "estilo")
