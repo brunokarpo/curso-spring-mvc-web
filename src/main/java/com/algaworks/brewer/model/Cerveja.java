@@ -48,6 +48,7 @@ public class Cerveja extends Entidade {
 	@DecimalMax(value = "100.0", message = "A comissão máxima é 100%")
 	private BigDecimal comissao;
 
+	@NotNull(message = "A quantidade em estoque é obrigatória")
 	@Max(value = 9999, message = "A quantidade em estoque não pode ser maior que 9.999")
 	@Column(name = "quantidade_estoque")
 	private Integer quantidadeEstoque;
