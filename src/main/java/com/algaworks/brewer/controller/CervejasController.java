@@ -22,6 +22,7 @@ import com.algaworks.brewer.service.CadastroCervejaService;
  *
  */
 @Controller
+@RequestMapping("/cervejas")
 public class CervejasController {
 
 	@Autowired
@@ -30,7 +31,7 @@ public class CervejasController {
 	@Autowired
 	private CadastroCervejaService cadastroCervejaService;
 
-	@RequestMapping("/cervejas/novo") // O que o usuário passa na URL
+	@RequestMapping("/novo") // O que o usuário passa na URL
 	public ModelAndView novo(Cerveja cerveja) {
 		ModelAndView mv = new ModelAndView("cerveja/CadastroCerveja");
 		mv.addObject("sabores", Sabor.values());
@@ -40,7 +41,7 @@ public class CervejasController {
 		return mv; // pagina HTML que sera devolvida para o usuario
 	}
 
-	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
+	@RequestMapping(value = "/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
 		if(result.hasErrors()) {
 			// Depois a gente adiciona as mensagens de erro.
