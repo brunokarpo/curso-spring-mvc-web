@@ -11,7 +11,7 @@ Brewer.EstiloCadastroRapido = (function() {
 		this.containerMensagemErro = $('.js-mensagem-cadastro-rapido-estilo');
 	}
 
-	function iniciar() {
+	EstiloCadastroRapido.prototype.iniciar = function() {
 		this.form.submit(function(event) {
 			event.preventDefault()
 		});
