@@ -1,6 +1,8 @@
 package com.algaworks.brewer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +17,7 @@ import com.algaworks.brewer.storage.FotosStorageRunnable;
 @RestController
 @RequestMapping("/fotos")
 public class FotosController {
-	
+
 	@Autowired
 	private FotoStorage fotoStorage;
 
@@ -27,6 +29,11 @@ public class FotosController {
 		t.start();
 
 		return resultado;
+	}
+
+	@GetMapping("/temp/{nome:.*}")
+	public byte[] recuperarFotoTemporaria(@PathVariable("nome") String nome) {
+		return fotoStorage.recuperarFotoTemporaria(nome);
 	}
 
 }
