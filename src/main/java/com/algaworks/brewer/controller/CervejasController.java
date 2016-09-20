@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.algaworks.brewer.model.Cerveja;
 import com.algaworks.brewer.model.Origem;
 import com.algaworks.brewer.model.Sabor;
+import com.algaworks.brewer.repository.Cervejas;
 import com.algaworks.brewer.repository.Estilos;
 import com.algaworks.brewer.service.CadastroCervejaService;
 
@@ -31,6 +32,9 @@ public class CervejasController {
 
 	@Autowired
 	private CadastroCervejaService cadastroCervejaService;
+
+	@Autowired
+	private Cervejas cervejas;
 
 	@RequestMapping("/novo") // O que o usuário passa na URL
 	public ModelAndView novo(Cerveja cerveja) {
@@ -59,6 +63,12 @@ public class CervejasController {
 	@GetMapping
 	public ModelAndView pesquisar() {
 		ModelAndView mv = new ModelAndView("cerveja/PesquisaCervejas");
+		mv.addObject("sabores", Sabor.values());
+		mv.addObject("estilos", estilos.findAll());
+		mv.addObject("origens", Origem.values());
+
+		mv.addObject("cervejas", cervejas.findAll());
+
 		return mv;
 	}
 
