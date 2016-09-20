@@ -14,6 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.algaworks.brewer.storage.FotoStorage;
 
+import groovy.util.ObjectGraphBuilder.ReflectionClassNameResolver;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
+
 public class FotoStorageLocal implements FotoStorage {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FotoStorageLocal.class);
@@ -45,13 +49,36 @@ public class FotoStorageLocal implements FotoStorage {
 
 	@Override
 	public byte[] recuperarFotoTemporaria(String nome) {
-		byte[] foto;
+		return recuperarFoto(nome, this.localTemporario);
+	}
+
+	@Override
+	public byte[] recuperar(String nome) {
+		return recuperarFoto(nome, this.local);
+	}
+
+	@Override
+	public void salvar(String foto) {
 		try {
-			foto = Files.readAllBytes(this.localTemporario.toAbsolutePath().resolve(nome));
+			Files.move(this.localTemporario.resolve(foto), this.local.resolve(foto));
 		} catch (IOException e) {
-			throw new RuntimeException("Erro ao recuperar foto temporária", e);
+			throw new RuntimeException("Erro ao mover a foto para o destino final", e);
 		}
-		return foto;
+
+		try {
+			Thumbnails.of(this.local.resolve(foto).toString()).size(40, 68).toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+		} catch (IOException e) {
+			throw new RuntimeException("Erro ao gerar thumbnail", e);
+		}
+	}
+
+
+	private byte[] recuperarFoto(String nome, Path pathEsperado) {
+		try {
+			return Files.readAllBytes(pathEsperado.toAbsolutePath().resolve(nome));
+		} catch (IOException e) {
+			throw new RuntimeException("Erro ao recuperar foto", e);
+		}
 	}
 
 	private void criarPastas() {
