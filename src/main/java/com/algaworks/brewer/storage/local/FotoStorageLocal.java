@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.algaworks.brewer.storage.FotoStorage;
 
-import groovy.util.ObjectGraphBuilder.ReflectionClassNameResolver;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
 
