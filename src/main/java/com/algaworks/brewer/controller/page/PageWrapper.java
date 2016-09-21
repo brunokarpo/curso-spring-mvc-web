@@ -2,14 +2,20 @@ package com.algaworks.brewer.controller.page;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.data.domain.Page;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageWrapper<T> {
 
 	private Page<T> pagina;
+	private UriComponentsBuilder uriBuilder;
 
-	public PageWrapper(Page<T> pagina) {
+	public PageWrapper(Page<T> pagina, HttpServletRequest httpServletResquest) {
 		this.pagina = pagina;
+		this.uriBuilder = ServletUriComponentsBuilder.fromRequest(httpServletResquest);
 	}
 
 	public List<T> getConteudo() {
@@ -34,6 +40,10 @@ public class PageWrapper<T> {
 
 	public boolean isUltima() {
 		return pagina.isLast();
+	}
+
+	public String urlParaPagina(int pagina) {
+		return uriBuilder.replaceQueryParam("page", pagina).build(true).encode().toString();
 	}
 
 }

@@ -137,17 +137,17 @@
 			<nav>
 				<ul class="pagination  pagination-sm">
 					<li th:class="${pagina.primeira} ? disabled">
-						<a th:href="|?page=${pagina.atual - 1}|" th:remove="${pagina.primeira} ? tag"><span>&laquo;</span></a>
+						<a th:href="${pagina.urlParaPagina(pagina.atual - 1)}" th:remove="${pagina.primeira} ? tag"><span>&laquo;</span></a>
 					</li>
 
 					<th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" th:with="numeroPagina=${p - 1}">
 						<li th:class="${numeroPagina == pagina.atual} ? active">
-							<a th:href="|?page=${numeroPagina}|">[[${p}]]</a>
+							<a th:href="${pagina.urlParaPagina(numeroPagina)}">[[${p}]]</a>
 						</li>
 					</th:block>
 
 					<li th:class="${pagina.ultima} ? disabled">
-						<a th:href="|?page=${pagina.atual + 1}|" th:remove="${pagina.ultima} ? tag"><span>&raquo;</span></a>
+						<a th:href="${pagina.urlParaPagina(pagina.atual + 1)}" th:remove="${pagina.ultima} ? tag"><span>&raquo;</span></a>
 					</li>
 				</ul>
 			</nav>
