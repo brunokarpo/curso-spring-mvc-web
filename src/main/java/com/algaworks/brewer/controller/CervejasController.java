@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.algaworks.brewer.controller.page.PageWrapper;
 import com.algaworks.brewer.model.Cerveja;
 import com.algaworks.brewer.model.Origem;
 import com.algaworks.brewer.model.Sabor;
@@ -71,7 +72,7 @@ public class CervejasController {
 		mv.addObject("estilos", estilos.findAll());
 		mv.addObject("origens", Origem.values());
 
-		Page<Cerveja> paginas = cervejas.filtrar(cervejaFilter, pageable);
+		PageWrapper<Cerveja> paginas = new PageWrapper<>(cervejas.filtrar(cervejaFilter, pageable));
 		mv.addObject("pagina", paginas);
 
 		return mv;
