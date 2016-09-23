@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.algaworks.brewer.model.Estilo;
 import com.algaworks.brewer.repository.Estilos;
+import com.algaworks.brewer.repository.filter.EstiloFilter;
 import com.algaworks.brewer.service.CadastroEstiloService;
 import com.algaworks.brewer.service.exception.NomeEstiloJaCadastradoException;
 
@@ -71,9 +72,9 @@ public class EstilosController {
 	}
 
 	@GetMapping
-	public ModelAndView pesquisar() {
+	public ModelAndView pesquisar(EstiloFilter filter) {
 		ModelAndView mv = new ModelAndView("estilo/PesquisaEstilos");
-		mv.addObject("estilos", estilos.findAll());
+		mv.addObject("estilos", estilos.filtrar(filter));
 
 		return mv;
 	}

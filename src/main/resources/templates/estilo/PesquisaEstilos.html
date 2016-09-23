@@ -31,11 +31,11 @@
 		</div>
 
 		<div class="container-fluid">
-			<form method="GET">
+			<form method="GET" th:object="${estiloFilter}">
 
 				<div class="form-group">
 					<label class="control-label" for="estilo">Estilo</label>
-					<input type="text" class="form-control" id="estilo" autofocus="autofocus">
+					<input type="text" class="form-control" id="estilo" autofocus="autofocus" th:field="*{nome}"/>
 				</div>
 
 				<button type="submit" class="btn  btn-primary">Pesquisar</button>
