@@ -59,7 +59,7 @@
 				</thead>
 
 				<tbody>
-					<tr th:each="estilo : ${estilos}">
+					<tr th:each="estilo : ${pagina.conteudo}">
 						<td class="text-center" th:text="${estilo.codigo}">1</td>
 						<td th:text="${estilo.nome}">Pale Lager</td>
 						<td class="text-center">
@@ -74,6 +74,26 @@
 				</tbody>
 
 			</table>
+		</div>
+
+		<div class="col-sm-12  text-center" th:if="${not pagina.vazia}">
+			<nav>
+				<ul class="pagination  pagination-sm">
+					<li th:class="${pagina.primeira} ? disabled">
+						<a th:href="${pagina.urlParaPagina(pagina.atual - 1)}" th:remove="${pagina.primeira} ? tag"><span>&laquo;</span></a>
+					</li>
+
+					<th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" th:with="numeroPagina=${p - 1}">
+						<li th:class="${numeroPagina == pagina.atual} ? active">
+							<a th:href="${pagina.urlParaPagina(numeroPagina)}">[[${p}]]</a>
+						</li>
+					</th:block>
+
+					<li th:class="${pagina.ultima} ? disabled">
+						<a th:href="${pagina.urlParaPagina(pagina.atual + 1)}" th:remove="${pagina.ultima} ? tag"><span>&raquo;</span></a>
+					</li>
+				</ul>
+			</nav>
 		</div>
 
 	</section>

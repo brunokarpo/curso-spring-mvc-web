@@ -2,10 +2,13 @@ package com.algaworks.brewer.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.algaworks.brewer.controller.page.PageWrapper;
+import com.algaworks.brewer.model.Cerveja;
 import com.algaworks.brewer.model.Estilo;
 import com.algaworks.brewer.repository.Estilos;
 import com.algaworks.brewer.repository.filter.EstiloFilter;
@@ -72,9 +77,13 @@ public class EstilosController {
 	}
 
 	@GetMapping
-	public ModelAndView pesquisar(EstiloFilter filter) {
+	public ModelAndView pesquisar(EstiloFilter estiloFiltro, BindingResult result,
+			@PageableDefault(size = 2) Pageable pagina, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("estilo/PesquisaEstilos");
-		mv.addObject("estilos", estilos.filtrar(filter));
+
+		PageWrapper<Estilo> paginas = new PageWrapper<>(estilos.filtrar(estiloFiltro, pagina), request);
+
+		mv.addObject("pagina", paginas);
 
 		return mv;
 	}
