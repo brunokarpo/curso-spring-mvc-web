@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageWrapper<T> {
@@ -17,7 +17,16 @@ public class PageWrapper<T> {
 
 	public PageWrapper(Page<T> pagina, HttpServletRequest httpServletResquest) {
 		this.pagina = pagina;
-		this.uriBuilder = ServletUriComponentsBuilder.fromRequest(httpServletResquest);
+
+		StringBuilder builder = new StringBuilder();
+		builder.append(httpServletResquest.getRequestURL().toString());
+
+		if(!StringUtils.isEmpty(httpServletResquest.getQueryString())) {
+			builder.append("?");
+			builder.append(httpServletResquest.getQueryString().replaceAll("\\+", "%20"));
+		}
+
+		this.uriBuilder = UriComponentsBuilder.fromHttpUrl(builder.toString());
 	}
 
 	public List<T> getConteudo() {
