@@ -25,6 +25,7 @@ Brewer.ComboCidade = (function() {
 
 	function ComboCidade(comboEstado) {
 		this.comboEstado = comboEstado;
+		this.combo = $('#cidade');
 	};
 
 	ComboCidade.prototype.enable = function() {
@@ -32,7 +33,12 @@ Brewer.ComboCidade = (function() {
 	};
 
 	function onEstadoAlterado(evento, codigoEstado) {
-		console.log('codigo estado do combo cidade' , codigoEstado);
+		var resposta = $.ajax({
+			url: this.combo.data('url'),
+			method: 'GET',
+			contentType: 'application/json',
+			data: { 'estado': codigoEstado }
+		});
 	}
 
 

@@ -2,7 +2,7 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/LayoutPadrao">
+	layout:decorate="~{layout/LayoutPadrao}">
 
 <head>
 	<title>Cadastro de Cliente</title>
@@ -95,9 +95,8 @@
 
 					<div class="col-sm-4  form-group  bw-required">
 						<label for="cidade" class="control-label">Cidade</label>
-						<select id="cidade" class="form-control">
+						<select id="cidade" class="form-control" data:url="@{/cidades}">
 							<option value="">Selecione a cidade</option>
-							<option value="">Goiânia</option>
 						</select>
 					</div>
 				</div>
