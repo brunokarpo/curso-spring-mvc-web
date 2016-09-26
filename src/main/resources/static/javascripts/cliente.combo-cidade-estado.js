@@ -1,33 +1,33 @@
 var Brewer = Brewer || {}
 
-Brewer.Estados = (function() {
+Brewer.ComboEstado = (function() {
 
-	function Estados() {
+	function ComboEstado() {
 		this.combo = $('#estado');
 		this.emitter = $({});
 		this.on = this.emitter.on.bind(this.emitter);
 	};
 
-	Estados.prototype.enable = function() {
-		this.combo.on('change', onEstadoAlterado.bind(this));
+	ComboEstado.prototype.enable = function() {
+		this.combo.change(onEstadoAlterado.bind(this));
 	};
 
 	function onEstadoAlterado() {
 		this.emitter.trigger('alterado', this.combo.val());
 	}
 
-	return Estados;
+	return ComboEstado;
 
 }());
 
 
-Brewer.Cidades = (function() {
+Brewer.ComboCidade = (function() {
 
-	function Cidades(comboEstado) {
+	function ComboCidade(comboEstado) {
 		this.comboEstado = comboEstado;
 	};
 
-	Cidades.prototype.enable = function() {
+	ComboCidade.prototype.enable = function() {
 		this.comboEstado.on('alterado', onEstadoAlterado.bind(this));
 	};
 
@@ -36,17 +36,17 @@ Brewer.Cidades = (function() {
 	}
 
 
-	return Cidades;
+	return ComboCidade;
 
 }());
 
 
 $(function() {
 
-	var comboEstado = new Brewer.Estados();
+	var comboEstado = new Brewer.ComboEstado();
 	comboEstado.enable();
 
-	var comboCidade = new Brewer.Cidades(comboEstado);
+	var comboCidade = new Brewer.ComboCidade(comboEstado);
 	comboCidade.enable();
 
 });
